@@ -33,13 +33,13 @@ class _RootViewState extends State<RootView> {
         onPressed: () {},
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      body: PageView(
-        controller: _pageController,
-        children: List<Widget>.generate(
-          _items.length,
-          (index) => Center(child: Text('$index')),
-        ),
-      ),
+      // body: PageView(
+      //   controller: _pageController,
+      //   children: List<Widget>.generate(
+      //     _items.length,
+      //     (index) => Center(child: Text('$index')),
+      //   ),
+      // ),
       bottomNavigationBar: BottomNavigationBar(items: _items),
     );
   }
