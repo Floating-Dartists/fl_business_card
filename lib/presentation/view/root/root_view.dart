@@ -1,9 +1,12 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../viewmodel/root/root_view_model.dart';
 
 const _kCornerRadius = 32.0;
 
-class RootView extends StatefulWidget {
+class RootView extends ConsumerStatefulWidget {
   static const routeName = 'root';
 
   const RootView({Key? key}) : super(key: key);
@@ -12,7 +15,7 @@ class RootView extends StatefulWidget {
   _RootViewState createState() => _RootViewState();
 }
 
-class _RootViewState extends State<RootView> {
+class _RootViewState extends ConsumerState<RootView> {
   final _items = List<BottomNavigationBarItem>.generate(
     4,
     (index) => BottomNavigationBarItem(
@@ -22,6 +25,14 @@ class _RootViewState extends State<RootView> {
   );
   final _pageController = PageController();
 
+  late final RootViewModel _viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _viewModel = ref.read(rootViewModelProvider.notifier);
+  }
+
   @override
   void dispose() {
     _pageController.dispose();
@@ -30,6 +41,7 @@ class _RootViewState extends State<RootView> {
 
   @override
   Widget build(BuildContext context) {
+    final activeIndex = ref.watch(rootViewModelProvider).bottomBarIndex;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.edit),
@@ -48,8 +60,11 @@ class _RootViewState extends State<RootView> {
         leftCornerRadius: _kCornerRadius,
         rightCornerRadius: _kCornerRadius,
         icons: _items.map<IconData>((e) => (e.icon as Icon).icon!).toList(),
-        activeIndex: 0,
-        onTap: (index) {},
+        activeIndex: activeIndex,
+        onTap: (index) {
+          _viewModel.goToIndex(index);
+          _pageController.jumpToPage(index);
+        },
       ),
     );
   }
