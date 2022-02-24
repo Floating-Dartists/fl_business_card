@@ -44,3 +44,12 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# ignore web sources
+/web/
+
+# ignore desktop sources
+/windows/
+
+# ignore fvm files
+*.fvm
