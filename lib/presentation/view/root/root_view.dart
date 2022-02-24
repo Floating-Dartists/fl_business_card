@@ -28,18 +28,18 @@ class _RootViewState extends State<RootView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.edit),
-        onPressed: () {},
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      // body: PageView(
-      //   controller: _pageController,
-      //   children: List<Widget>.generate(
-      //     _items.length,
-      //     (index) => Center(child: Text('$index')),
-      //   ),
+      // floatingActionButton: FloatingActionButton(
+      //   child: const Icon(Icons.edit),
+      //   onPressed: () {},
       // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      body: PageView(
+        controller: _pageController,
+        children: List<Widget>.generate(
+          _items.length,
+          (index) => Center(child: Text('$index')),
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(items: _items),
     );
   }
