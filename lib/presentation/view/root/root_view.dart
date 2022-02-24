@@ -1,4 +1,7 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+
+const _kCornerRadius = 32.0;
 
 class RootView extends StatefulWidget {
   static const routeName = 'root';
@@ -40,7 +43,14 @@ class _RootViewState extends State<RootView> {
           (index) => Center(child: Text('$index')),
         ),
       ),
-      // bottomNavigationBar: BottomNavigationBar(items: _items),
+      bottomNavigationBar: AnimatedBottomNavigationBar(
+        gapLocation: GapLocation.center,
+        leftCornerRadius: _kCornerRadius,
+        rightCornerRadius: _kCornerRadius,
+        icons: _items.map<IconData>((e) => (e.icon as Icon).icon!).toList(),
+        activeIndex: 0,
+        onTap: (index) {},
+      ),
     );
   }
 }
