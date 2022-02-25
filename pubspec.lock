@@ -203,11 +203,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: main
-      resolved-ref: b4a5adc773428eb788a5b5772b2c112230cc07dd
+      ref: "0.1.0"
+      resolved-ref: f7b0de0c77b19858ae18c7ddbb7777e916370cda
       url: "https://github.com/Floating-Dartists/fl_business_card_core.git"
     source: git
-    version: "0.0.1"
+    version: "0.1.0"
   flutter:
     dependency: "direct main"
     description: flutter
