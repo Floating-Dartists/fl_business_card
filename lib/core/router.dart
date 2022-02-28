@@ -11,7 +11,7 @@ GoRouter routerGenerator({String? initialLocation}) => GoRouter(
       initialLocation: initialLocation ?? Routes.root,
       routes: [
         GoRoute(
-          name: RootView.routeName,
+          name: RootView.name,
           path: Routes.root,
           builder: (_, __) => const RootView(),
         ),
@@ -23,7 +23,7 @@ GoRouter routerGenerator({String? initialLocation}) => GoRouter(
     );
 
 class Routes extends Equatable {
-  static const root = '/';
+  static const root = RootView.route;
 
   @override
   List<Object?> get props => [root];
