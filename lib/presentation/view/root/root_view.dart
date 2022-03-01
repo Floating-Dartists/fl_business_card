@@ -1,11 +1,11 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../core/router.dart';
 import '../../viewmodel/root/root_view_model.dart';
 import '../edit_link/edit_link_view.dart';
-
-const _kCornerRadius = 32.0;
 
 class RootView extends ConsumerStatefulWidget {
   static const name = 'root';
@@ -66,8 +66,8 @@ class _RootViewState extends ConsumerState<RootView>
       floatingActionButton: ScaleTransition(
         scale: _animation,
         child: FloatingActionButton(
-          child: const Icon(Icons.edit),
-          onPressed: () {},
+          child: const Icon(Icons.add),
+          onPressed: () => context.pushNamed(Routes.addLink),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -78,8 +78,6 @@ class _RootViewState extends ConsumerState<RootView>
       bottomNavigationBar: AnimatedBottomNavigationBar(
         notchAndCornersAnimation: _animation,
         gapLocation: GapLocation.center,
-        leftCornerRadius: _kCornerRadius,
-        rightCornerRadius: _kCornerRadius,
         icons: _pages.map((e) => e.icon).toList(),
         activeIndex: activeIndex,
         onTap: (index) {
