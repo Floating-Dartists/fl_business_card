@@ -10,7 +10,7 @@ void main() {
     goldenTest(
       'renders correctly',
       fileName: 'error_view',
-      widget: GoldenTestGroup(
+      builder: () => GoldenTestGroup(
         children: [
           GoldenTestScenario(
             name: 'base view',
