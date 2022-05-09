@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/router.dart';
+import '../../../router.dart';
 import '../../viewmodel/root/root_view_model.dart';
 import '../edit_link/edit_link_view.dart';
+import '../settings/settings_view.dart';
+import '../share/share_view.dart';
 
 class RootView extends ConsumerStatefulWidget {
-  static const name = 'root';
-  static const route = '/';
-
   const RootView({Key? key}) : super(key: key);
 
   @override
@@ -22,8 +21,8 @@ class _RootViewState extends ConsumerState<RootView>
   final _pages = const <_PageItem>[
     _PageItem(icon: Icons.home, page: EditLinkView()),
     _PageItem(icon: Icons.pages, page: Center(child: Text('2'))),
-    _PageItem(icon: Icons.share, page: Center(child: Text('3'))),
-    _PageItem(icon: Icons.pages, page: Center(child: Text('4'))),
+    _PageItem(icon: Icons.share, page: ShareView()),
+    _PageItem(icon: Icons.settings, page: SettingsView()),
   ];
 
   final _pageController = PageController();
@@ -67,7 +66,7 @@ class _RootViewState extends ConsumerState<RootView>
         scale: _animation,
         child: FloatingActionButton(
           child: const Icon(Icons.add),
-          onPressed: () => context.pushNamed(Routes.addLink),
+          onPressed: () => context.pushNamed(AppRouteName.addLink.name),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

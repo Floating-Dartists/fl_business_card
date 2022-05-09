@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'core/router.dart';
+import 'router.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final _router = routerGenerator();
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +24,8 @@ class MyApp extends StatelessWidget {
       supportedLocales: const [Locale('en'), Locale('fr')],
       title: 'Business Card',
       theme: ThemeData.light(),
-      routerDelegate: router.routerDelegate,
-      routeInformationParser: router.routeInformationParser,
+      routerDelegate: _router.routerDelegate,
+      routeInformationParser: _router.routeInformationParser,
     );
   }
 }
