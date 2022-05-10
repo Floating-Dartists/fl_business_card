@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../router.dart';
 import '../../viewmodel/root/root_view_model.dart';
-import '../edit_link/edit_link_view.dart';
+import '../manage_links/manage_links_view.dart';
 import '../settings/settings_view.dart';
 import '../share/share_view.dart';
 
@@ -19,7 +19,7 @@ class RootView extends ConsumerStatefulWidget {
 class _RootViewState extends ConsumerState<RootView>
     with SingleTickerProviderStateMixin {
   final _pages = const <_PageItem>[
-    _PageItem(icon: Icons.home, page: EditLinkView()),
+    _PageItem(icon: Icons.home, page: ManageLinksView()),
     _PageItem(icon: Icons.pages, page: Center(child: Text('2'))),
     _PageItem(icon: Icons.share, page: ShareView()),
     _PageItem(icon: Icons.settings, page: SettingsView()),

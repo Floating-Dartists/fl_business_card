@@ -1,11 +1,14 @@
 import 'package:equatable/equatable.dart';
 
-class Link extends Equatable {
+class BusinessLink extends Equatable {
   final String name;
   final Uri uri;
+
+  /// The index of the link in the list. This value also act as an id when
+  /// editing a link.
   final int index;
 
-  const Link({
+  const BusinessLink({
     required this.name,
     required this.uri,
     required this.index,
