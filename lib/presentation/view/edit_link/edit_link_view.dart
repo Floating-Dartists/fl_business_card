@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../data/repositories/link_repository.dart';
+
 class EditLinkView extends ConsumerStatefulWidget {
   const EditLinkView({Key? key}) : super(key: key);
 
@@ -9,7 +11,7 @@ class EditLinkView extends ConsumerStatefulWidget {
 }
 
 class _EditLinkViewState extends ConsumerState<EditLinkView> {
-  final _entries = List<String>.generate(4, (index) => 'Entry $index');
+  late final _entries = LinkRepository().getLinks();
 
   @override
   Widget build(BuildContext context) {
@@ -17,36 +19,40 @@ class _EditLinkViewState extends ConsumerState<EditLinkView> {
       body: SafeArea(
         child: ReorderableListView.builder(
           itemCount: _entries.length,
-          itemBuilder: (_, index) => Dismissible(
-            direction: DismissDirection.endToStart,
-            key: ValueKey(_entries[index]),
-            background: const DecoratedBox(
-              decoration: BoxDecoration(color: Colors.red),
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: EdgeInsets.only(right: 8.0),
-                  child: Icon(
-                    Icons.delete,
-                    color: Colors.white,
+          itemBuilder: (_, index) {
+            final item = _entries[index];
+            return Dismissible(
+              direction: DismissDirection.endToStart,
+              key: ValueKey(_entries[index]),
+              background: const DecoratedBox(
+                decoration: BoxDecoration(color: Colors.red),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 8.0),
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
-            ),
-            onDismissed: (_) => setState(() {
-              _entries.remove(_entries[index]);
-            }),
-            child: ListTile(
-              leading: const Icon(Icons.reorder),
-              title: Text(_entries[index]),
-              trailing: IconButton(
-                icon: const Icon(Icons.edit),
-                onPressed: () {},
+              onDismissed: (_) => setState(() {
+                _entries.remove(_entries[index]);
+              }),
+              child: ListTile(
+                leading: const Icon(Icons.reorder),
+                title: Text(item.name),
+                trailing: IconButton(
+                  icon: const Icon(Icons.edit),
+                  onPressed: () {},
+                ),
               ),
-            ),
-          ),
+            );
+          },
           onReorder: (oldIndex, newIndex) {
             debugPrint('$oldIndex -> $newIndex');
+            // TODO: update index of items
           },
         ),
       ),
