@@ -3,7 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../data/repositories/link_repository.dart';
+import '../../../domain/entities/business_link.dart';
 import '../../../router.dart';
+import '../../common/async_value.dart';
+import 'widgets/loading_list_shimmer.dart';
 
 class ManageLinksView extends ConsumerStatefulWidget {
   const ManageLinksView({Key? key}) : super(key: key);
@@ -19,7 +22,8 @@ class _ManageLinksViewState extends ConsumerState<ManageLinksView> {
     final linksValue = ref.watch(linksStreamProvider);
     return Scaffold(
       body: SafeArea(
-        child: linksValue.when(
+        child: AsyncValueWidget<List<BusinessLink>>(
+          value: linksValue,
           data: (entries) => ReorderableListView.builder(
             buildDefaultDragHandles: false,
             itemCount: entries.length,
@@ -65,8 +69,7 @@ class _ManageLinksViewState extends ConsumerState<ManageLinksView> {
               // TODO: update index of items
             },
           ),
-          error: (_, __) => const Center(child: Icon(Icons.error)),
-          loading: () => const Center(child: CircularProgressIndicator()),
+          loading: LoadingListShimmer.new,
         ),
       ),
     );

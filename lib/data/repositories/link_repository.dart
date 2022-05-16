@@ -24,7 +24,8 @@ final linkRepositoryProvider = Provider<LinkRepository>((ref) {
   return LinkRepository();
 });
 
-final linksStreamProvider = StreamProvider<List<BusinessLink>>((ref) {
+final linksStreamProvider =
+    StreamProvider.autoDispose<List<BusinessLink>>((ref) {
   final repository = ref.watch(linkRepositoryProvider);
   return repository.watchLinks();
 });
