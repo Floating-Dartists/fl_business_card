@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,21 +9,21 @@ import 'presentation/view/root/root_view.dart';
 GoRouter routerGenerator({String? initialLocation}) {
   return GoRouter(
     urlPathStrategy: UrlPathStrategy.path,
-    initialLocation: initialLocation ?? AppRoutePath.root,
+    initialLocation: initialLocation ?? AppRoute.root.path,
     routes: [
       GoRoute(
-        name: AppRouteName.root.name,
-        path: AppRoutePath.root,
+        name: AppRoute.root.name,
+        path: AppRoute.root.path,
         builder: (_, __) => const RootView(),
         routes: [
           GoRoute(
-            name: AppRouteName.addLink.name,
-            path: AppRoutePath.addLink,
+            name: AppRoute.addLink.name,
+            path: AppRoute.addLink.path,
             builder: (_, __) => const AddLinkView(),
           ),
           GoRoute(
-            name: AppRouteName.editLink.name,
-            path: AppRoutePath.editLink,
+            name: AppRoute.editLink.name,
+            path: AppRoute.editLink.path,
             builder: (_, state) {
               final id = int.parse(state.params['id']!);
               return EditLinkView(id: id);
@@ -40,13 +39,12 @@ GoRouter routerGenerator({String? initialLocation}) {
   );
 }
 
-enum AppRouteName { root, addLink, editLink }
+enum AppRoute {
+  root('/'),
+  addLink('add-link'),
+  editLink('edit-link/:id');
 
-class AppRoutePath extends Equatable {
-  static const root = '/';
-  static const addLink = 'add-link';
-  static const editLink = 'edit-link/:id';
+  const AppRoute(this.path);
 
-  @override
-  List<Object?> get props => [root, addLink, editLink];
+  final String path;
 }

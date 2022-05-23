@@ -1,6 +1,8 @@
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'root_state.dart';
+part 'root_state.dart';
 
 final rootViewModelProvider =
     StateNotifierProvider.autoDispose<RootViewModel, RootState>(

@@ -1,5 +1,4 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+part of 'root_view_model.dart';
 
 @immutable
 class RootState extends Equatable {

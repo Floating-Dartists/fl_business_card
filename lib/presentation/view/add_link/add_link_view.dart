@@ -45,7 +45,12 @@ class AddLinkView extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                ElevatedButton(onPressed: () {}, child: const Text('Add')),
+                ElevatedButton(
+                  onPressed: () {
+                    // TODO: add link and refresh data
+                  },
+                  child: const Text('Add'),
+                ),
               ],
             ),
           ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'presentation/viewmodel/locale/locale_view_model.dart';
 import 'router.dart';
 
 class MyApp extends StatefulWidget {
@@ -15,17 +17,29 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [Locale('en'), Locale('fr')],
-      title: 'Business Card',
-      theme: ThemeData.light(),
-      routerDelegate: _router.routerDelegate,
-      routeInformationParser: _router.routeInformationParser,
+    return Consumer(
+      builder: (context, ref, _) {
+        final locale = ref.watch(localeViewModelProvider);
+        return MaterialApp.router(
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          locale: locale,
+          supportedLocales: kSupportedLocales,
+          localeResolutionCallback: (locale, supportedLocales) {
+            if (supportedLocales.contains(locale)) {
+              return locale;
+            }
+            return supportedLocales.first;
+          },
+          title: 'Business Card',
+          theme: ThemeData.light(),
+          routerDelegate: _router.routerDelegate,
+          routeInformationParser: _router.routeInformationParser,
+        );
+      },
     );
   }
 }

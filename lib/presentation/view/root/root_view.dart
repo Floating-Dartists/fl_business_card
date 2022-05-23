@@ -13,7 +13,7 @@ class RootView extends ConsumerStatefulWidget {
   const RootView({Key? key}) : super(key: key);
 
   @override
-  _RootViewState createState() => _RootViewState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _RootViewState();
 }
 
 class _RootViewState extends ConsumerState<RootView>
@@ -66,7 +66,7 @@ class _RootViewState extends ConsumerState<RootView>
         scale: _animation,
         child: FloatingActionButton(
           child: const Icon(Icons.add),
-          onPressed: () => context.pushNamed(AppRouteName.addLink.name),
+          onPressed: () => context.pushNamed(AppRoute.addLink.name),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

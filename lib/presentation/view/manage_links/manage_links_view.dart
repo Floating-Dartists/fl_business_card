@@ -57,7 +57,7 @@ class _ManageLinksViewState extends ConsumerState<ManageLinksView> {
                   trailing: IconButton(
                     icon: const Icon(Icons.edit),
                     onPressed: () => context.goNamed(
-                      AppRouteName.editLink.name,
+                      AppRoute.editLink.name,
                       params: {'id': '${item.index}'},
                     ),
                   ),
